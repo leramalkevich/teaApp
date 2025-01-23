@@ -1,1 +1,203 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: #FFFFFF;
+}
+
+.searching-input {
+  width: 194px;
+  border: 1px solid #CED4DA;
+  padding: 8px 15px;
+  box-sizing: border-box;
+  margin-right: 10px;
+  outline: none;
+}
+
+.btn {
+  width: 170px;
+  padding: 7px 45px;
+  box-sizing: border-box;
+}
+
+.searching-btn {
+  width: 100px;
+  padding: 8px 26px;
+}
+
+.main-item {
+  height: 640px;
+}
+
+.main-item > div > h2 {
+  max-width: 600px;
+}
+
+.main-item-image {
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  right: 70%;
+  bottom: 10.25rem;
+  left: 10%;
+}
+
+.no-image-background img {
+  position: relative;
+  left: 55%;
+  top: 10%;
+  height: 80%;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: 1px solid #0d6efd;
+  border-radius: 50%;
+  top: calc(50% - 25px);
+}
+
+.carousel-control-prev {
+  left: 3%;
+}
+
+.carousel-control-next {
+  right: 3%;
+}
+
+.carousel-control-prev-icon {
+  background-image: url("../public/assets/images/chevron-left.svg");
+}
+
+.carousel-control-next-icon {
+  background-image: url("../public/assets/images/chevron-right.svg");
+}
+
+.product-item {
+  max-width: 416px;
+}
+
+.product-image {
+  text-decoration: none;
+  max-width: 416px;
+}
+
+.product-text {
+  max-width: 360px;
+}
+
+.accordion-item {
+  margin-bottom: 0;
+  border: 0;
+}
+
+.accordion-button::after {
+  background-image: url("../public/assets/images/chevron-down.svg");
+  transform: rotate(0deg);
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: url("../public/assets/images/chevron-down.svg");
+  transform: rotate(180deg);
+}
+
+.orderContainer h4 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.form {
+  max-width: 636px;
+}
+
+.form-control {
+  display: inline-block;
+  width: 196px;
+}
+
+.full-name-item {
+  margin-right: 24px;
+  width: 196px;
+}
+
+.full-name-item:last-child {
+  margin-right: 0;
+}
+
+.origin-item {
+  margin-right: 24px;
+  width: 306px;
+}
+
+.origin-item:last-child {
+  margin-right: 0;
+}
+
+.form .error {
+  color: #c26064;
+}
+
+.form .valid {
+  color: #007BFF;
+}
+
+@media screen and (max-width: 767px) {
+  .full-name-item {
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .no-image-background img {
+    display: none;
+  }
+  .carousel-caption {
+    text-align: center;
+  }
+  .carousel-control-prev, .carousel-control-next {
+    display: none;
+  }
+  .products .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-items {
+    max-width: 416px;
+  }
+  .product-item {
+    width: 80%;
+  }
+  .product-image img {
+    width: 100%
+  }
+  .form-group {
+    padding: 0 15px;
+  }
+  .form-group .full-name, .form-group .origin {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .full-name-item {
+    margin-right: 0;
+    width: 100%;
+  }
+  .origin-item {
+    margin-right: 0;
+    width: 100%;
+  }
+}

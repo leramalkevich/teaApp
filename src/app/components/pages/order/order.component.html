@@ -1,0 +1,47 @@
+<section class="order-form text-black">
+  <div class="container form-container mb-5">
+    <h3 class="order-title text-center fw-bold fs-2 mb-5" id="orderTitle">Сделать заказ</h3>
+    <h4 class="order-title orderContainer d-none text-center fw-bold fs-2 mb-5" id="hidden">Спасибо за заказ. Мы свяжемся с Вами в ближайшее время!</h4>
+    <form class="form d-md-flex flex-md-column justify-content-md-center mx-auto mb-5 wow animate__fadeInDown clientOrder"
+          data-wow-duration="2s" id="orderForm">
+      <div class="form-group full-name d-md-flex flex-md-row justify-content-md-between mb-3">
+        <div class="full-name-item justify-content-sm-center">
+          <label for="clientsName" class="form-label">Имя</label>
+          <input type="text" id="clientsName" name="clientName" class="form-control w-100">
+        </div>
+        <div class="full-name-item">
+          <label for="surname" class="form-label">Фамилия</label>
+          <input type="text" id="surname" name="clientSurname" class="form-control w-100">
+        </div>
+        <div class="full-name-item">
+          <label for="phone" class="form-label">Телефон</label>
+          <input type="text" id="phone" name="phone" class="form-control w-100 phone">
+        </div>
+
+      </div>
+      <div class="form-group origin d-sm-flex flex-sm-row justify-content-sm-between w-100 mb-3">
+        <div class="origin-item">
+          <label for="country" class="form-label">Страна</label>
+          <input type="text" id="country" name="country" class="form-control w-100">
+        </div>
+        <div class="origin-item">
+          <label for="index" class="form-label">Индекс</label>
+          <input type="text" id="index" name="index" class="form-control w-100">
+        </div>
+      </div>
+      <div class="form-group address w-100 mb-4">
+        <label for="address" class="form-label">Адрес</label>
+        <input type="text" id="address" name="address" class="form-control w-100">
+      </div>
+      <div class="form-group address w-100 mb-4">
+        <label for="product" class="form-label">Товар</label>
+        <input type="text" id="product" name="address" class="form-control w-100">
+      </div>
+      <div class="form-group address w-100 mb-4">
+        <label for="order-comment" class="form-label">Комментарий к заказу</label>
+        <input type="text" id="order-comment" name="address" class="form-control w-100">
+      </div>
+      <button type="submit" class="btn btn-primary" id="sendButton">Отправить</button>
+    </form>
+  </div>
+</section>
