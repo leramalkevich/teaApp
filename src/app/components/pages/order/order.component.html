@@ -1,47 +1,108 @@
 <section class="order-form text-black">
-  <div class="container form-container mb-5">
+  <div class="container form-container mb-5 mt-5">
     <h3 class="order-title text-center fw-bold fs-2 mb-5" id="orderTitle">Сделать заказ</h3>
-    <h4 class="order-title orderContainer d-none text-center fw-bold fs-2 mb-5" id="hidden">Спасибо за заказ. Мы свяжемся с Вами в ближайшее время!</h4>
-    <form class="form d-md-flex flex-md-column justify-content-md-center mx-auto mb-5 wow animate__fadeInDown clientOrder"
-          data-wow-duration="2s" id="orderForm">
+    <h4 class="order-title orderContainer d-none text-center fw-bold fs-2 mb-5" id="hidden">Спасибо за заказ. Мы
+      свяжемся с Вами в ближайшее время!</h4>
+
+    <form novalidate
+          class="form d-md-flex flex-md-column justify-content-md-center mx-auto mb-5 clientOrder needs-validation"
+          id="orderForm" [formGroup]="formValues" (ngSubmit)="handleSubmit()">
       <div class="form-group full-name d-md-flex flex-md-row justify-content-md-between mb-3">
-        <div class="full-name-item justify-content-sm-center">
+        <div class="full-name-item justify-content-sm-center col-md-4">
           <label for="clientsName" class="form-label">Имя</label>
-          <input type="text" id="clientsName" name="clientName" class="form-control w-100">
+          <input type="text" id="clientsName" class="form-control w-100" formControlName="name" value="" required>
+          <div
+            *ngIf="(formValues.get('name')?.invalid && (formValues.get('name')?.touched || formValues.get('name')?.dirty))">
+            <div class="invalid-feedback" *ngIf="formValues.get('name')?.errors?.['required']">
+              Введите свое имя
+            </div>
+            <div class="invalid-feedback" *ngIf="formValues.get('name')?.errors?.['pattern']">
+              Проверьте введенные данные
+            </div>
+          </div>
         </div>
-        <div class="full-name-item">
+
+        <div class="full-name-item col-md-4">
           <label for="surname" class="form-label">Фамилия</label>
-          <input type="text" id="surname" name="clientSurname" class="form-control w-100">
+          <input type="text" id="surname" name="clientSurname" class="form-control w-100" formControlName="lastName">
+          <div
+            *ngIf="formValues.get('lastName')?.invalid && (formValues.get('lastName')?.touched || formValues.get('lastName')?.dirty)">
+            <div class="invalid-feedback" *ngIf="formValues.get('lastName')?.errors?.['required']">
+              Введите свою фамилию
+            </div>
+            <div class="invalid-feedback" *ngIf="formValues.get('lastName')?.errors?.['pattern']">
+              Проверьте введенные данные
+            </div>
+          </div>
         </div>
-        <div class="full-name-item">
+
+        <div class="full-name-item col-md-4">
           <label for="phone" class="form-label">Телефон</label>
-          <input type="text" id="phone" name="phone" class="form-control w-100 phone">
+          <input type="text" id="phone" name="phone" class="form-control w-100 phone" formControlName="phone">
+          <div class="invalid-feedback" *ngIf="formValues.get('phone')?.invalid && (formValues.get('phone')?.touched ||
+          formValues.get('phone')?.dirty) && formValues.get('phone')?.errors?.['required']">
+            Введите свой номер телефона
+          </div>
         </div>
 
       </div>
       <div class="form-group origin d-sm-flex flex-sm-row justify-content-sm-between w-100 mb-3">
         <div class="origin-item">
           <label for="country" class="form-label">Страна</label>
-          <input type="text" id="country" name="country" class="form-control w-100">
+<!--          <input type="text" id="country" name="country" class="form-control w-100" formControlName="country">-->
+          <select class="form-select" id="country" formControlName="country" required>
+            <option value="">Выберите страну...</option>
+            <option>Беларусь</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="formValues.get('country')?.invalid && (formValues.get('country')?.touched ||
+          formValues.get('country')?.dirty) && formValues.get('country')?.errors?.['required']">
+            Поле обязательно для заполнения
+          </div>
         </div>
+
         <div class="origin-item">
           <label for="index" class="form-label">Индекс</label>
-          <input type="text" id="index" name="index" class="form-control w-100">
+          <input type="text" id="index" name="index" class="form-control w-100" formControlName="zip">
+          <div *ngIf="formValues.get('zip')?.invalid && (formValues.get('zip')?.touched || formValues.get('zip')?.dirty)">
+            <div class="invalid-feedback" *ngIf="formValues.get('zip')?.errors?.['required']">
+              Поле обязательно для заполнения
+            </div>
+            <div class="invalid-feedback" *ngIf="formValues.get('zip')?.errors?.['pattern']">
+              Введены некорректные данные
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="form-group address w-100 mb-4">
         <label for="address" class="form-label">Адрес</label>
-        <input type="text" id="address" name="address" class="form-control w-100">
+        <input type="text" id="address" name="address" class="form-control w-100" formControlName="address">
+        <div *ngIf="formValues.get('address')?.invalid && (formValues.get('address')?.touched || formValues.get('address')?.dirty)">
+          <div class="invalid-feedback" *ngIf="formValues.get('address')?.errors?.['required']">
+            Введите адрес доставки
+          </div>
+          <div class="invalid-feedback" *ngIf="formValues.get('address')?.errors?.['pattern']">
+            Введены некорректные данные
+          </div>
+        </div>
+
       </div>
+
       <div class="form-group address w-100 mb-4">
         <label for="product" class="form-label">Товар</label>
-        <input type="text" id="product" name="address" class="form-control w-100">
+        <input type="text" id="product" name="product" class="form-control w-100" readonly>
       </div>
+
       <div class="form-group address w-100 mb-4">
         <label for="order-comment" class="form-label">Комментарий к заказу</label>
-        <input type="text" id="order-comment" name="address" class="form-control w-100">
+        <input type="text" id="order-comment" name="comment" class="form-control w-100" formControlName="comment">
       </div>
-      <button type="submit" class="btn btn-primary" id="sendButton">Отправить</button>
+
+      <button type="submit" class="btn btn-primary" id="sendButton" [disabled]="formValues.invalid">Отправить</button>
+      <div class="invalid-feedback server-feedback" id="validationServer">
+        Произошла ошибка. Попробуйте еще раз.
+      </div>
     </form>
+
   </div>
 </section>

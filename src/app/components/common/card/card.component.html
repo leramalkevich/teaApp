@@ -1,0 +1,16 @@
+  <div class="col product-item border rounded-1 mb-4">
+    <div *ngIf="product.image; then productImageBlock else defaultImageBlock"></div>
+    <ng-template #productImageBlock>
+      <div class="product-image">
+        <img src="{{product.image}}">
+      </div>
+    </ng-template>
+    <ng-template #defaultImageBlock>
+      <div class="product-image">
+        <img src="assets/images/logo.png" alt="Logo">
+      </div>
+    </ng-template>
+
+    <h5 class="product-title mt-3 mb-4 text-center mx-4 fw-bold fs-5" [title]="product.title">{{product.title}}</h5>
+    <a type="button" class="btn btn-primary mb-4 mx-auto d-flex justify-content-center" [routerLink]="['/catalogue', product.id]">Подробнее</a>
+  </div>

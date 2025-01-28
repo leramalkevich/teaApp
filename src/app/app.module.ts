@@ -9,6 +9,9 @@ import { MainComponent } from './components/pages/main/main.component';
 import { ProductCardsComponent } from './components/pages/product-cards/product-cards.component';
 import { ProductPageComponent } from './components/pages/product-page/product-page.component';
 import { OrderComponent } from './components/pages/order/order.component';
+import {provideHttpClient} from '@angular/common/http';
+import { CardComponent } from './components/common/card/card.component';
+import { ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import { OrderComponent } from './components/pages/order/order.component';
     MainComponent,
     ProductCardsComponent,
     ProductPageComponent,
-    OrderComponent
+    OrderComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

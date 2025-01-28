@@ -9,39 +9,25 @@ body {
   background-color: #FFFFFF;
 }
 
-.searching-input {
-  width: 194px;
-  border: 1px solid #CED4DA;
-  padding: 8px 15px;
-  box-sizing: border-box;
-  margin-right: 10px;
-  outline: none;
-}
-
 .btn {
   width: 170px;
   padding: 7px 45px;
   box-sizing: border-box;
 }
 
-.searching-btn {
-  width: 100px;
-  padding: 8px 26px;
-}
-
-.main-item {
-  height: 640px;
-}
-
-.main-item > div > h2 {
-  max-width: 600px;
-}
-
-.main-item-image {
-  height: 100%;
-  object-fit: cover;
-}
-
+//.main-item {
+//  height: 640px;
+//}
+//
+//.main-item > div > h2 {
+//  max-width: 600px;
+//}
+//
+//.main-item-image {
+//  height: 100%;
+//  object-fit: cover;
+//}
+//
 .carousel-caption {
   right: 70%;
   bottom: 10.25rem;
@@ -80,18 +66,22 @@ body {
   background-image: url("../public/assets/images/chevron-right.svg");
 }
 
-.product-item {
-  max-width: 416px;
-}
 
-.product-image {
-  text-decoration: none;
-  max-width: 416px;
-}
 
-.product-text {
-  max-width: 360px;
-}
+//.product-item {
+//  max-width: 416px;
+//}
+//
+//.product-image {
+//  text-decoration: none;
+//  max-width: 416px;
+//}
+//
+//.product-text {
+//  max-width: 360px;
+//}
+
+
 
 .accordion-item {
   margin-bottom: 0;
