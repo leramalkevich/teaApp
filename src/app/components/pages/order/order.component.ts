@@ -20,7 +20,7 @@ export class OrderComponent implements OnInit {
     lastName: ['', [Validators.required, Validators.pattern('^[А-Яа-я ]+$')]],
     phone: ['', [Validators.required, Validators.pattern('^[\+]?[0-9]{11,12}\s*$')]],
     country: ['', [Validators.required]],
-    zip: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]],
+    zip: ['', [Validators.required, Validators.pattern('^[0-9]{6}$'), Validators.maxLength(6), Validators.minLength(6)]],
     product: [''],
     // product: ['', [Validators.required]],
     address: ['', [Validators.required, Validators.pattern('^[А-Яа-я0-9-\/\. ]+$')]],
@@ -29,7 +29,6 @@ export class OrderComponent implements OnInit {
   private subscription: Subscription | null = null;
   private subscriptionOrder: Subscription | null = null;
   private productToOder: HTMLInputElement | null = null;
-
 
   constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) {
   }
@@ -47,34 +46,6 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  // public makeOrder() {
-  //   event?.preventDefault();
-  //   console.log('All is working!');
-  //   if (!this.formValues.value.name || !this.formValues.value.lastName || !this.formValues.value.phone || !this.formValues.value.country
-  //   || !this.formValues.value.zip || !this.formValues.value.address) {
-  //     alert('Ошибка! Форма не заполнена');
-  //     return;
-  //   } else {
-  //     const data = {
-  //       name: this.formValues.value.name,
-  //       last_name: this.formValues.value.lastName,
-  //       phone: this.formValues.value.phone,
-  //       country: this.formValues.value.country,
-  //       zip: this.formValues.value.zip,
-  //       product: this.productToOder,
-  //       address: this.formValues.value.address,
-  //       comment: this.formValues.value.comment
-  //     }
-  //       this.subscriptionOrder = this.http.post<{ success: number, message?: string }>('https://testologia.ru/order-tea', data)
-  //         .subscribe(response=>{
-  //           if(response.success === 1){
-  //
-  //           } else {
-  //             alert('Error');
-  //           }
-  //         })
-  //   }
-  // }
   public handleSubmit() {
     const data = {
       name: this.formValues.value.name,
@@ -86,16 +57,46 @@ export class OrderComponent implements OnInit {
       address: this.formValues.value.address,
       comment: this.formValues.value.comment
     }
-    console.log(data);
     this.subscriptionOrder = this.http.post<{ success: number, message?: string }>('https://testologia.ru/order-tea', data)
-            .subscribe(response=>{
-              if(response.success === 1){
-                alert('ОК');
-              } else if (response.success === 0) {
-                console.log('Error');
-                document.getElementById('validationServer')!.style.display = 'block';
-              }
-            })
+      .subscribe(response => {
+        if (response.success === 1) {
+          // alert('ОК');
+          const formElement = $("#orderForm");
+          const title = $("#orderTitle");
+          if (formElement && title) {
+            const hiddenSuccessText = $("#hidden");
+            title.detach();
+            formElement.detach();
+            if(hiddenSuccessText) {
+              hiddenSuccessText.removeClass('d-none');
+            }
+          }
+        } else if (response.success === 0) {
+          console.log('Error');
+          const errorMessage = document.getElementById('validationServer');
+          if (errorMessage) {
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+              errorMessage.style.display = 'none';
+            }, 3000)
+          }
+        }
+      })
+  }
+
+  public numbersOnly(event: KeyboardEvent): void {
+    let allowedToEnter = [
+      'Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Delete'
+    ];
+    if (allowedToEnter.includes(event.key) || event.key?.match(/\d+$/g)) {
+      return;
+    } else {
+      event.preventDefault();
+    }
+
+    // if (event.key && !event.key.match(/\d+$/)) {
+    //   event.preventDefault();
+    // }
   }
 
 }

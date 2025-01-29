@@ -1,8 +1,10 @@
 <section class="order-form text-black">
   <div class="container form-container mb-5 mt-5">
     <h3 class="order-title text-center fw-bold fs-2 mb-5" id="orderTitle">Сделать заказ</h3>
-    <h4 class="order-title orderContainer d-none text-center fw-bold fs-2 mb-5" id="hidden">Спасибо за заказ. Мы
-      свяжемся с Вами в ближайшее время!</h4>
+    <div class="order-title orderContainer d-none text-center fw-bold fs-2 my-5 p-5 h-100" id="hidden">
+      <div class="text-primary-emphasis fs-2 my-5">Спасибо за заказ. Мы свяжемся с Вами в ближайшее время!</div>
+      <a class="btn btn-outline-primary my-5" [routerLink]="'/'">На главную</a>
+    </div>
 
     <form novalidate
           class="form d-md-flex flex-md-column justify-content-md-center mx-auto mb-5 clientOrder needs-validation"
@@ -62,12 +64,13 @@
 
         <div class="origin-item">
           <label for="index" class="form-label">Индекс</label>
-          <input type="text" id="index" name="index" class="form-control w-100" formControlName="zip">
+          <input type="text" id="index" name="index" class="form-control w-100" formControlName="zip" (keydown)="numbersOnly($event)">
           <div *ngIf="formValues.get('zip')?.invalid && (formValues.get('zip')?.touched || formValues.get('zip')?.dirty)">
             <div class="invalid-feedback" *ngIf="formValues.get('zip')?.errors?.['required']">
               Поле обязательно для заполнения
             </div>
-            <div class="invalid-feedback" *ngIf="formValues.get('zip')?.errors?.['pattern']">
+            <div class="invalid-feedback" *ngIf="formValues.get('zip')?.errors?.['pattern']
+            || formValues.get('zip')?.errors?.['maxLength'] || formValues.get('zip')?.errors?.['minLength']">
               Введены некорректные данные
             </div>
           </div>

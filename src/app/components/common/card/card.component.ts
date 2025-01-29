@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ProductType} from '../../../types/product.type';
 
 @Component({
-  selector: 'card-component',
+  selector: 'cardComponent',
   standalone: false,
 
   templateUrl: './card.component.html',
