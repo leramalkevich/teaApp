@@ -1,9 +1,13 @@
 <section class="products text-black">
-  <div class="container">
-    <h3 class="my-sm-5 fw-bold fs-2 text-center">Наши чайные коллекции</h3>
+  <div class="container h-auto">
+    <h3 class="my-sm-5 fw-bold fs-2 text-center" #title>Наши чайные коллекции</h3>
     <div
       class="product-items d-flex flex-row justify-content-sm-center justify-content-lg-between align-items-sm-center flex-wrap">
       <cardComponent *ngFor="let product of products" [product]="product"></cardComponent>
+    </div>
+    <div class="loader-bg d-flex justify-content-center align-items-center w-100 h-100 position-fixed top-0 bg-black bg-opacity-50"
+         *ngIf="loading">
+      <div class="spinner-border text-primary loader" role="status"></div>
     </div>
   </div>
 </section>

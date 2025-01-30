@@ -3,7 +3,7 @@
     <h2 class="product-title mt-3 mb-3 text-center mx-4 fw-bold fs-3">Описание чая</h2>
     <div class="product-item border rounded-1 mb-4 mx-auto">
 
-      <h5 class="product-title mt-3 mb-4 text-center mx-4 fw-bold fs-5" [title]="product.title">{{product.title}}</h5>
+      <h5 class="product-title mt-4 mb-4 text-center mx-4 fw-bold fs-5" [title]="product.title">{{product.title}}</h5>
 
       <div class="d-flex flex-column flex-lg-row justify-content-lg-center align-items-lg-center mb-3">
         <div *ngIf="product.image; then productImageBlock else defaultImageBlock"></div>

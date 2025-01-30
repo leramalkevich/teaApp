@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FormBuilder, Validators} from '@angular/forms';
@@ -13,7 +13,7 @@ declare var $: any;
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   formValues = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[А-Яа-я ]+$')]],
@@ -44,6 +44,11 @@ export class OrderComponent implements OnInit {
         this.productToOder = params['product'];
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+    this.subscriptionOrder?.unsubscribe();
   }
 
   public handleSubmit() {

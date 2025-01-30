@@ -20,4 +20,8 @@ export class MainComponent implements OnInit {
 
   }
 
+  showForm(){
+    $('#modalOnClick').modal('show');
+  }
+
 }
