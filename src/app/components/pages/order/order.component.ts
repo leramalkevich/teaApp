@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import {CustomValidators} from '../../../shared/custom-validators';
 
 declare var $: any;
 
@@ -18,11 +19,11 @@ export class OrderComponent implements OnInit, OnDestroy {
   formValues = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[А-Яа-я ]+$')]],
     lastName: ['', [Validators.required, Validators.pattern('^[А-Яа-я ]+$')]],
-    phone: ['', [Validators.required, Validators.pattern('^[\+]?[0-9]{11,12}\s*$')]],
+    phone: ['', [Validators.required, CustomValidators.withPlusPhoneNumberValidator, CustomValidators.noPlusPhoneNumberValidator]],
+    // phone: ['', [Validators.required, Validators.pattern('^[\+]?[0-9]{11,12}\s*$')]],
     country: ['', [Validators.required]],
-    zip: ['', [Validators.required, Validators.pattern('^[0-9]{6}$'), Validators.maxLength(6), Validators.minLength(6)]],
+    zip: ['', [Validators.required, Validators.pattern('^[0-9]{6}$'), Validators.maxLength(6)]],
     product: [''],
-    // product: ['', [Validators.required]],
     address: ['', [Validators.required, Validators.pattern('^[А-Яа-я0-9-\/\. ]+$')]],
     comment: [''],
   }, {updateOn: 'blur'});
@@ -90,14 +91,17 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   public numbersOnly(event: KeyboardEvent): void {
-    let allowedToEnter = [
-      'Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Delete'
-    ];
+    let allowedToEnter = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Delete'];
     if (allowedToEnter.includes(event.key) || event.key?.match(/\d+$/g)) {
       return;
     } else {
       event.preventDefault();
     }
+
+    // event.key.charCodeAt(0);
+    // if (!/[0-9]/.test(event.key) && !/['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Delete']/.test(event.key)) {
+    //   event.preventDefault();
+    // }
 
     // if (event.key && !event.key.match(/\d+$/)) {
     //   event.preventDefault();

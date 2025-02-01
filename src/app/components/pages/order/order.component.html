@@ -40,10 +40,18 @@
 
         <div class="full-name-item col-md-4">
           <label for="phone" class="form-label">Телефон</label>
-          <input type="text" id="phone" name="phone" class="form-control w-100 phone" formControlName="phone">
+          <input type="text" id="phone" name="phone" class="form-control w-100 phone" formControlName="phone" (keydown)="numbersOnly($event)">
           <div class="invalid-feedback" *ngIf="formValues.get('phone')?.invalid && (formValues.get('phone')?.touched ||
-          formValues.get('phone')?.dirty) && formValues.get('phone')?.errors?.['required']">
-            Введите свой номер телефона
+          formValues.get('phone')?.dirty)">
+            <div *ngIf="formValues.get('phone')?.errors?.['required']">
+              Введите свой номер телефона
+            </div>
+            <div class="invalid-feedback" *ngIf="formValues.get('phone')?.errors?.['phone']">
+              Например, +375291112233
+            </div>
+            <div class="invalid-feedback" *ngIf="formValues.get('phone')?.errors?.['noPlusPhone']">
+              Например, 80291112233
+            </div>
           </div>
         </div>
 
@@ -70,8 +78,8 @@
               Поле обязательно для заполнения
             </div>
             <div class="invalid-feedback" *ngIf="formValues.get('zip')?.errors?.['pattern']
-            || formValues.get('zip')?.errors?.['maxLength'] || formValues.get('zip')?.errors?.['minLength']">
-              Введены некорректные данные
+            || formValues.get('zip')?.errors?.['maxLength'] || formValues.get('zip')?.errors?.['maxLength']">
+              Индекс должен содержать 6 цифр
             </div>
           </div>
         </div>
