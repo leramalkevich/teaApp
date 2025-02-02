@@ -4,6 +4,7 @@ import {ProductType} from '../../../types/product.type';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs';
 import {ProductFilterService} from '../../../services/product-filter.service';
+import {ProductRequestService} from '../../../services/product-request.service';
 
 @Component({
   selector: 'product-cards',
@@ -15,7 +16,9 @@ import {ProductFilterService} from '../../../services/product-filter.service';
 export class ProductCardsComponent implements OnInit, AfterViewInit {
   @ViewChild('title')
   private title!: ElementRef;
-  constructor(private http: HttpClient, private router: Router, private productService: ProductFilterService) {
+
+  constructor(private http: HttpClient, private router: Router, private productService: ProductFilterService,
+              private productRequest: ProductRequestService) {
   }
 
   public products: ProductType[] = [];
@@ -23,11 +26,11 @@ export class ProductCardsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loading = true;
-    this.http.get<ProductType[]>('https://testologia.ru/tea')
+    this.productRequest.getProducts()
       .pipe(
         tap(() => {
           this.loading = false;
-          this.title.nativeElement.innerText = 'Наши чайные коллекции';
+          // this.title.nativeElement.innerText = 'Наши чайные коллекции';
         })
       )
       .subscribe({
@@ -36,46 +39,47 @@ export class ProductCardsComponent implements OnInit, AfterViewInit {
         },
         error: (error) => {
           console.log(error);
-          this.router.navigate(['/']);
+          this.router.navigate(['/'])
         }
-      });
+      })
   }
 
   ngAfterViewInit() {
     this.productService.subject.subscribe((value) => {
       if (value && value !== '') {
-        this.http.get<[ProductType]>('https://testologia.ru/tea?search=' + value)
-          .pipe(
-            tap(()=>{
-              this.loading = false;
-            })
-          )
-          .subscribe(response => {
-            let existingProduct = response.map(item=> item.title);
-            if (existingProduct && existingProduct[0] !== undefined) {
-              this.title.nativeElement.innerText = 'Результаты поиска по запросу "' + value + '"';
-              this.products = response;
-            } else {
-              this.products = []
-              this.title.nativeElement.innerText = 'По вашему запросу ничего не найдено!';
-            }
-          })
-      } else {
-        this.http.get<ProductType[]>('https://testologia.ru/tea')
+        this.productRequest.searchProducts(value.toString())
           .pipe(
             tap(() => {
               this.loading = false;
             })
           )
+          .subscribe(response => {
+            let existingProduct = response.map(item => item.title);
+            if (existingProduct && existingProduct[0] !== undefined) {
+              this.title.nativeElement.innerText = 'Результаты поиска по запросу "' + value + '"';
+              this.products = response;
+            } else {
+              this.products = [];
+              this.title.nativeElement.innerText = 'По вашему запросу ничего не найдено!';
+            }
+          })
+      } else {
+        this.productRequest.getProducts()
+          .pipe(
+            tap(()=>{
+              this.loading = false;
+              this.title.nativeElement.innerText = 'Наши чайные коллекции';
+            })
+          )
           .subscribe({
-            next: (data) => {
+            next: (data)=>{
               this.products = data;
             },
-            error: (error) => {
+            error:(error)=>{
               console.log(error);
               this.router.navigate(['/']);
             }
-          });
+          })
       }
     })
   }
