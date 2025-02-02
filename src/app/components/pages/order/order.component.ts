@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {CustomValidators} from '../../../shared/custom-validators';
+import {ProductRequestService} from '../../../services/product-request.service';
 
 declare var $: any;
 
@@ -19,8 +20,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   formValues = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('^[А-Яа-я ]+$')]],
     lastName: ['', [Validators.required, Validators.pattern('^[А-Яа-я ]+$')]],
-    phone: ['', [Validators.required, CustomValidators.withPlusPhoneNumberValidator, CustomValidators.noPlusPhoneNumberValidator]],
-    // phone: ['', [Validators.required, Validators.pattern('^[\+]?[0-9]{11,12}\s*$')]],
+    phone: ['', [Validators.required, CustomValidators.phoneNumberValidator]],
     country: ['', [Validators.required]],
     zip: ['', [Validators.required, Validators.pattern('^[0-9]{6}$'), Validators.maxLength(6)]],
     product: [''],
@@ -31,7 +31,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   private subscriptionOrder: Subscription | null = null;
   private productToOder: HTMLInputElement | null = null;
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) {
+  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, private productRequest:ProductRequestService) {
   }
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   public handleSubmit() {
-    const data = {
+    this.subscriptionOrder = this.productRequest.makeAnOrder({
       name: this.formValues.value.name,
       last_name: this.formValues.value.lastName,
       phone: this.formValues.value.phone,
@@ -62,36 +62,35 @@ export class OrderComponent implements OnInit, OnDestroy {
       product: this.productToOder,
       address: this.formValues.value.address,
       comment: this.formValues.value.comment
-    }
-    this.subscriptionOrder = this.http.post<{ success: number, message?: string }>('https://testologia.ru/order-tea', data)
-      .subscribe(response => {
+    })
+      .subscribe(response=>{
         if (response.success === 1) {
-          // alert('ОК');
-          const formElement = $("#orderForm");
-          const title = $("#orderTitle");
-          if (formElement && title) {
-            const hiddenSuccessText = $("#hidden");
-            title.detach();
-            formElement.detach();
-            if(hiddenSuccessText) {
-              hiddenSuccessText.removeClass('d-none');
-            }
-          }
-        } else if (response.success === 0) {
-          console.log('Error');
-          const errorMessage = document.getElementById('validationServer');
-          if (errorMessage) {
-            errorMessage.style.display = 'block';
-            setTimeout(() => {
-              errorMessage.style.display = 'none';
-            }, 3000)
-          }
-        }
+          //       // alert('ОК');
+                const formElement = $("#orderForm");
+                const title = $("#orderTitle");
+                if (formElement && title) {
+                  const hiddenSuccessText = $("#hidden");
+                  title.detach();
+                  formElement.detach();
+                  if(hiddenSuccessText) {
+                    hiddenSuccessText.removeClass('d-none');
+                  }
+                }
+              } else if (response.success === 0) {
+                console.log('Error');
+                const errorMessage = document.getElementById('validationServer');
+                if (errorMessage) {
+                  errorMessage.style.display = 'block';
+                  setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                  }, 3000)
+                }
+              }
       })
   }
 
   public numbersOnly(event: KeyboardEvent): void {
-    let allowedToEnter = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Delete'];
+    let allowedToEnter = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Delete', '+'];
     if (allowedToEnter.includes(event.key) || event.key?.match(/\d+$/g)) {
       return;
     } else {
@@ -107,5 +106,4 @@ export class OrderComponent implements OnInit, OnDestroy {
     //   event.preventDefault();
     // }
   }
-
 }

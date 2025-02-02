@@ -1,12 +1,8 @@
 import {AbstractControl, ValidationErrors} from '@angular/forms';
 
 export class CustomValidators {
-  static withPlusPhoneNumberValidator(control:AbstractControl):ValidationErrors|null{
-    const result = /\+[0-9]{12}\s*$/.test(control.value);
+  static phoneNumberValidator(control:AbstractControl):ValidationErrors|null{
+    const result = /^(\+\d{12}\s*$|\d{11}\s*$)/.test(control.value);
     return result ? null : {phone:control.value};
-  }
-  static noPlusPhoneNumberValidator(control:AbstractControl):ValidationErrors|null{
-    const result = /[0-9]{11}\s*$/.test(control.value);
-    return result ? null : {noPlusPhone:control.value}
   }
 }

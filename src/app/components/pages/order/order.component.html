@@ -7,7 +7,7 @@
     </div>
 
     <form novalidate
-          class="form d-md-flex flex-md-column justify-content-md-center mx-auto mb-5 clientOrder needs-validation"
+          class="form d-md-flex flex-md-column justify-content-md-center mx-auto mb-5 clientOrder needs-validation pb-5"
           id="orderForm" [formGroup]="formValues" (ngSubmit)="handleSubmit()">
       <div class="form-group full-name d-md-flex flex-md-row justify-content-md-between mb-3">
         <div class="full-name-item justify-content-sm-center col-md-4">
@@ -47,10 +47,7 @@
               Введите свой номер телефона
             </div>
             <div class="invalid-feedback" *ngIf="formValues.get('phone')?.errors?.['phone']">
-              Например, +375291112233
-            </div>
-            <div class="invalid-feedback" *ngIf="formValues.get('phone')?.errors?.['noPlusPhone']">
-              Например, 80291112233
+              Доступны следующие форматы +375291112233 либо 80291112233
             </div>
           </div>
         </div>

@@ -28,4 +28,8 @@ export class ProductRequestService {
   searchProducts(value:string):Observable<ProductType[]>{
     return this.http.get<ProductType[]>('https://testologia.ru/tea?search=' + value)
   }
+
+  makeAnOrder(data: {}) {
+    return this.http.post<{success:number, message?:string}>('https://testologia.ru/order-tea', data);
+  }
 }
