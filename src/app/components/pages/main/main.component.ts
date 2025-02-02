@@ -16,12 +16,6 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     setTimeout(()=>{
       $('#exampleModal').modal('show');
-    },10000)
-
+    },10000);
   }
-
-  showForm(){
-    $('#modalOnClick').modal('show');
-  }
-
 }

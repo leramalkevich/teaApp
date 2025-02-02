@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductType} from '../../../types/product.type';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ProductRequestService} from '../../../services/product-request.service';
 
 @Component({
   selector: 'product-page',
@@ -12,7 +13,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ProductPageComponent implements OnInit{
   product: ProductType;
-  constructor(private http:HttpClient, private activatedRoute:ActivatedRoute, private router:Router) {
+  constructor(private http:HttpClient, private activatedRoute:ActivatedRoute, private router:Router,
+              private productRequest:ProductRequestService) {
     this.product = {
       id: 0,
       image: '',
@@ -24,14 +26,10 @@ export class ProductPageComponent implements OnInit{
   ngOnInit() {
     this.activatedRoute.params.subscribe((params)=>{
       if (params['id']) {
-        console.log(params);
-        const id = params['id'];
-        console.log(id);
-        this.http.get<ProductType>('https://testologia.ru/tea?id='+id)
+        this.productRequest.getProduct(+params['id'])
           .subscribe({
             next:(data)=>{
               this.product = data;
-              console.log(this.product);
             },
             error:()=>{
               this.router.navigate(['/']);

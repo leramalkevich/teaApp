@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {catchError, Observable, of, retry, tap} from 'rxjs';
+import {catchError, Observable, of, retry} from 'rxjs';
 import {ProductType} from '../types/product.type';
 
 @Injectable({
@@ -15,10 +15,7 @@ export class ProductRequestService {
       params:params
     })
       .pipe(
-        tap((result)=>{
-          console.log(result);
-        }),
-        catchError(error=>{
+        catchError(()=>{
           return of([]);
         }),
         retry(2)
@@ -31,5 +28,9 @@ export class ProductRequestService {
 
   makeAnOrder(data: {}) {
     return this.http.post<{success:number, message?:string}>('https://testologia.ru/order-tea', data);
+  }
+
+  getProduct(id:number):Observable<ProductType>{
+    return this.http.get<ProductType>(`https://testologia.ru/tea?id=${id}`);
   }
 }
