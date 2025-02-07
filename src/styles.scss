@@ -63,21 +63,6 @@ body {
   background-image: url("../public/assets/images/chevron-right.svg");
 }
 
-.accordion-item {
-  margin-bottom: 0;
-  border: 0;
-}
-
-.accordion-button::after {
-  background-image: url("../public/assets/images/chevron-down.svg");
-  transform: rotate(0deg);
-}
-
-.accordion-button:not(.collapsed)::after {
-  background-image: url("../public/assets/images/chevron-down.svg");
-  transform: rotate(180deg);
-}
-
 .orderContainer h4 {
   text-align: center;
   font-weight: bold;

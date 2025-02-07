@@ -14,6 +14,7 @@ import { CardComponent } from './components/common/card/card.component';
 import { ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PopupComponent} from './shared/popup/popup.component';
+import { AccordionComponent } from './shared/accordion/accordion.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {PopupComponent} from './shared/popup/popup.component';
     ProductPageComponent,
     OrderComponent,
     CardComponent,
-    PopupComponent
+    PopupComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,
