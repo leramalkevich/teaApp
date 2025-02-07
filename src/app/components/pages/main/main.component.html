@@ -1,52 +1,42 @@
 <section class="main">
   <div class="container mt-5">
-    <div id="carouselCaptions" class="carousel slide carousel-fade my-5 wow animate__fadeInDown"
-         data-wow-duration="2s" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0"
-                class="active text-muted"
-                aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" class="text-muted"
-                aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" class="text-muted"
-                aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active main-item">
-          <img src="assets/images/image1.png" class="main-item-image card-img" alt="Image 1">
-          <div class="carousel-caption w-75 top-3 mt-md-4 text-black text-sm-center text-md-start">
-            <h1 class="my-md-5 display-5 fw-bold">Скидки на травянные чаи</h1>
-            <p class="mb-5 fs-5">Узнай все подробности, заполнив заявку</p>
-            <button type="button" class="btn btn-primary">Заполнить</button>
-          </div>
+    @if (images) {
+    <ngb-carousel>
+
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper carousel-item active main-item">
+          <img [src]="images[0]" class="main-item-image card-img" alt="First slide" />
         </div>
-        <div class="carousel-item main-item no-image-background bg-light">
-          <img src="assets/images/image2.png" alt="Image 2" class="d-sm-none d-md-block main-item-image">
-          <div class="carousel-caption w-75 text-sm-center text-md-start">
-            <h2 class="mb-5 fw-bold display-5 text-black">Закажи три пачки чая и получи подарок</h2>
+        <div class="carousel-caption w-75 top-3 mt-md-4 text-black text-sm-center text-md-start">
+          <h1 class="my-md-5 display-5 fw-bold text-black">Скидки на травянные чаи</h1>
+          <p class="mb-5 fs-5 text-black">Узнай все подробности, заполнив заявку</p>
+          <button type="button" class="btn btn-primary">Заполнить</button>
+        </div>
+      </ng-template>
+
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper carousel-item active no-image-background main-item bg-light">
+          <img [src]="images[1]" alt="Second slide" />
+        </div>
+        <div class="carousel-caption w-75 text-sm-center text-md-start">
+            <h2 class="mb-5 fw-bold display-5 text-black text-wrap">Закажи три пачки чая и получи подарок</h2>
             <a type="button" class="btn btn-primary" [routerLink]="'/catalogue'">К каталогу</a>
-          </div>
         </div>
-        <div class="carousel-item main-item">
-          <img src="assets/images/image3.png" class="main-item-image card-img" alt="Image 3">
-          <div class="carousel-caption w-75 text-black text-sm-center text-md-start">
-            <h2 class="mb-5 fw-bold display-5 text-black text-sm-center text-md-start">Попробуй нашу новинку
+      </ng-template>
+
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper carousel-item active main-item">
+          <img [src]="images[2]" alt="Third slide" />
+        </div>
+        <div class="carousel-caption w-75 text-black text-sm-center text-md-start">
+          <h2 class="mb-5 fw-bold display-5 text-black text-sm-center text-md-start">Попробуй нашу новинку
               — ягодный чай</h2>
             <button type="button" class="btn btn-primary" [routerLink]="'/catalogue'">К каталогу</button>
-          </div>
         </div>
-      </div>
-      <button class="carousel-control-prev d-sm-none d-lg-block" type="button" data-bs-target="#carouselCaptions"
-              data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next d-sm-none d-lg-block" type="button" data-bs-target="#carouselCaptions"
-              data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+      </ng-template>
+
+    </ngb-carousel>
+    }
   </div>
 </section>
 
