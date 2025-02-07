@@ -12,6 +12,8 @@ import { OrderComponent } from './components/pages/order/order.component';
 import {provideHttpClient} from '@angular/common/http';
 import { CardComponent } from './components/common/card/card.component';
 import { ReactiveFormsModule} from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {PopupComponent} from './shared/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { ReactiveFormsModule} from '@angular/forms';
     ProductCardsComponent,
     ProductPageComponent,
     OrderComponent,
-    CardComponent
+    CardComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     // FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
