@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {ProductType} from '../../../types/product.type';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs';
-import {ProductFilterService} from '../../../services/product-filter.service';
-import {ProductRequestService} from '../../../services/product-request.service';
+import {ProductFilterService} from '../../../shared/services/product-filter.service';
+import {ProductRequestService} from '../../../shared/services/product-request.service';
 
 @Component({
   selector: 'product-cards',

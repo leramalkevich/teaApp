@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {CustomValidators} from '../../../shared/custom-validators';
-import {ProductRequestService} from '../../../services/product-request.service';
+import {CustomValidators} from '../../shared/custom-validators';
+import {ProductRequestService} from '../../shared/services/product-request.service';
 
 declare var $: any;
 

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {ProductFilterService} from '../../../services/product-filter.service';
+import {ProductFilterService} from '../../services/product-filter.service';
 
 @Component({
   selector: 'header-component',

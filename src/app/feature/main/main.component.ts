@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {PopupComponent} from '../../../shared/popup/popup.component';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import {PopupComponent} from '../../shared/components/popup/popup.component';
 
 @Component({
   selector: 'main',

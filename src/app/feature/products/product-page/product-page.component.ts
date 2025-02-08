@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductType} from '../../../types/product.type';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ProductRequestService} from '../../../services/product-request.service';
+import {ProductRequestService} from '../../../shared/services/product-request.service';
 
 @Component({
   selector: 'product-page',

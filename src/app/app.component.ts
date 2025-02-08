@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ProductFilterService} from './services/product-filter.service';
+import {ProductFilterService} from './shared/services/product-filter.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,6 @@ import {ProductFilterService} from './services/product-filter.service';
 export class AppComponent {
   title = 'teaApp';
 
-  constructor(private productService:ProductFilterService) {
-  }
+  constructor() {
+  };
 }
