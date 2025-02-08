@@ -17,9 +17,6 @@ import {FooterComponent} from './shared/layout/footer/footer.component';
     BrowserModule,
     SharedModule,
     AppRoutingModule,
-    // FormsModule,
-    // ReactiveFormsModule,
-    // NgbModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

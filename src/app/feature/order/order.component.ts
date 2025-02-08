@@ -65,7 +65,6 @@ export class OrderComponent implements OnInit, OnDestroy {
     })
       .subscribe(response=>{
         if (response.success === 1) {
-          //       // alert('ОК');
                 const formElement = $("#orderForm");
                 const title = $("#orderTitle");
                 if (formElement && title) {

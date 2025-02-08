@@ -9,7 +9,6 @@ import {ProductRequestService} from '../../../shared/services/product-request.se
 @Component({
   selector: 'product-cards',
   standalone: false,
-
   templateUrl: './product-cards.component.html',
   styleUrl: './product-cards.component.scss'
 })

@@ -7,7 +7,6 @@ import {ProductRequestService} from '../../../shared/services/product-request.se
 @Component({
   selector: 'product-page',
   standalone: false,
-
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss'
 })
