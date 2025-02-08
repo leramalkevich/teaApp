@@ -1,1 +1,0 @@
-import{a as n,f as o}from"./chunk-SHQWFIFR.js";var r=class t{subject=new n;passInfoEvent(e){this.subject.next(e)}deleteInfoEvent(){this.subject.next(null)}constructor(){}static \u0275fac=function(c){return new(c||t)};static \u0275prov=o({token:t,factory:t.\u0275fac,providedIn:"root"})};export{r as a};
